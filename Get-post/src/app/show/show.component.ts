@@ -19,7 +19,7 @@ export class ShowComponent implements OnInit{
 
   edit(i:number){
     //  alert("Editing task: "+this.tasks[i].title)
-    this.router.navigate(['edit',i])
+    this.router.navigate(['edit',this.tasks[i]._id])
   }
   done(i:any){
 //    alert("Deleting task: "+this.tasks[i]._id)

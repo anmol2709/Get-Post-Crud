@@ -14,12 +14,12 @@ import {AppService} from "../app.service";
 export class CreateComponent  {
   task:Task=new Task()
   task1:Task[]=[]
-  index:number;
+  index:string;
   constructor(private router: Router,private route: ActivatedRoute, private service:AppService) {}
   ngOnInit() {
     this.route.params.subscribe((data: any) => {
-      this.index = +data.i;
-      if (this.index || this.index === 0) {
+      this.index = data.i;
+      if (this.index) {
         // this.task = this.service.tasks[this.index];
 
         this.pageRefresh()
@@ -71,7 +71,7 @@ export class CreateComponent  {
   //
   submit() {
 
-    if(this.index||this.index==0) {
+    if(this.index) {
       this.service.update(this.task).subscribe((data1: any) => {
             // alert(JSON.stringify(data1))
           },
@@ -111,7 +111,8 @@ export class CreateComponent  {
 
     this.service.getData().subscribe((data1: any) => {
           this.task1 = data1;
-          this.task = this.task1[this.index]
+          // this.task = this.task1[this.index]
+          this.task = this.task1.filter(x=>x._id==this.index)[0]
           // alert(JSON.stringify(data1))
         },
         (e: any) => {

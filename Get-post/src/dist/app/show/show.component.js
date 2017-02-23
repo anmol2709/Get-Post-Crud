@@ -23,7 +23,7 @@ var ShowComponent = (function () {
     };
     ShowComponent.prototype.edit = function (i) {
         //  alert("Editing task: "+this.tasks[i].title)
-        this.router.navigate(['edit', i]);
+        this.router.navigate(['edit', this.tasks[i]._id]);
     };
     ShowComponent.prototype.done = function (i) {
         //    alert("Deleting task: "+this.tasks[i]._id)

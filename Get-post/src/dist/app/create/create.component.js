@@ -25,8 +25,8 @@ var CreateComponent = (function () {
     CreateComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.subscribe(function (data) {
-            _this.index = +data.i;
-            if (_this.index || _this.index === 0) {
+            _this.index = data.i;
+            if (_this.index) {
                 // this.task = this.service.tasks[this.index];
                 _this.pageRefresh();
             }
@@ -67,7 +67,7 @@ var CreateComponent = (function () {
     // });
     //
     CreateComponent.prototype.submit = function () {
-        if (this.index || this.index == 0) {
+        if (this.index) {
             this.service.update(this.task).subscribe(function (data1) {
                 // alert(JSON.stringify(data1))
             }, function (e) {
@@ -92,7 +92,8 @@ var CreateComponent = (function () {
         var _this = this;
         this.service.getData().subscribe(function (data1) {
             _this.task1 = data1;
-            _this.task = _this.task1[_this.index];
+            // this.task = this.task1[this.index]
+            _this.task = _this.task1.filter(function (x) { return x._id == _this.index; })[0];
             // alert(JSON.stringify(data1))
         }, function (e) {
             alert(e);
